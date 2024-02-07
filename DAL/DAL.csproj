@@ -111,6 +111,7 @@
     <Compile Include="T_User.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserDAO.cs" />
     <Compile Include="Video.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
     </Compile>
