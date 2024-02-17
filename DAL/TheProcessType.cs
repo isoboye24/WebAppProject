@@ -14,7 +14,14 @@ namespace DAL
     
     public partial class TheProcessType
     {
+        public TheProcessType()
+        {
+            this.Log_Table = new HashSet<Log_Table>();
+        }
+    
         public int ProcessID { get; set; }
         public string ProcessName { get; set; }
+    
+        public virtual ICollection<Log_Table> Log_Table { get; set; }
     }
 }

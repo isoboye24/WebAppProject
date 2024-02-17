@@ -14,6 +14,22 @@ namespace DAL
     
     public partial class T_User
     {
+        public T_User()
+        {
+            this.Addresses = new HashSet<Address>();
+            this.Ads = new HashSet<Ad>();
+            this.Categories = new HashSet<Category>();
+            this.Comments = new HashSet<Comment>();
+            this.Contacts = new HashSet<Contact>();
+            this.FavLogoTitles = new HashSet<FavLogoTitle>();
+            this.Metas = new HashSet<Meta>();
+            this.PostOrNews = new HashSet<PostOrNew>();
+            this.PostTags = new HashSet<PostTag>();
+            this.SocialMedias = new HashSet<SocialMedia>();
+            this.PostImages = new HashSet<PostImage>();
+            this.Videos = new HashSet<Video>();
+        }
+    
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
@@ -26,5 +42,18 @@ namespace DAL
         public System.DateTime AddDate { get; set; }
         public int LastUpdateUserID { get; set; }
         public System.DateTime LastUpdateDate { get; set; }
+    
+        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Ad> Ads { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Contact> Contacts { get; set; }
+        public virtual ICollection<FavLogoTitle> FavLogoTitles { get; set; }
+        public virtual ICollection<Meta> Metas { get; set; }
+        public virtual ICollection<PostOrNew> PostOrNews { get; set; }
+        public virtual ICollection<PostTag> PostTags { get; set; }
+        public virtual ICollection<SocialMedia> SocialMedias { get; set; }
+        public virtual ICollection<PostImage> PostImages { get; set; }
+        public virtual ICollection<Video> Videos { get; set; }
     }
 }

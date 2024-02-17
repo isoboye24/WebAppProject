@@ -19,7 +19,9 @@ namespace DAL
         public string IPAddress { get; set; }
         public int ProcessID { get; set; }
         public int ProcessType { get; set; }
-        public int ProcessCategoryType { get; set; }
+        public string ProcessCategoryType { get; set; }
         public System.DateTime ProcessDate { get; set; }
+    
+        public virtual TheProcessType TheProcessType { get; set; }
     }
 }

@@ -109,7 +109,7 @@
           <Property Name="IPAddress" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="ProcessID" Type="int" Nullable="false" />
           <Property Name="ProcessType" Type="int" Nullable="false" />
-          <Property Name="ProcessCategoryType" Type="int" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="varchar" MaxLength="50" />
           <Property Name="ProcessDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Meta">
@@ -246,6 +246,210 @@ warning 6002: The table/view 'POSTDATA.dbo.PostImage' does not have a primary ke
           <Property Name="LastUpdateUserID" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Address_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="LastUpdataUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ads_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Ads" Type="Self.Ads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ads">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNews" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavLogoTitle_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="FavLogoTitle" Type="Self.FavLogoTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FavLogoTitle">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_TheProcessType1">
+          <End Role="TheProcessType" Type="Self.TheProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheProcessType">
+              <PropertyRef Name="ProcessID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meta_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostImage_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNews" Multiplicity="1" />
+          <End Role="PostImage" Type="Self.PostImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="PostImage">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostImage_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostImage" Type="Self.PostImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostImage">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOrNews_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="PostOrNews" Type="Self.PostOrNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="PostOrNews">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOrNews_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostOrNews" Type="Self.PostOrNews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostOrNews">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTag_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNews" Multiplicity="1" />
+          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="PostTag">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTag_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostTag">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocialMedia_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SocialMedia">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Video_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="POSTDATAModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ads" EntityType="Self.Ads" Schema="dbo" store:Type="Tables" />
@@ -274,6 +478,74 @@ warning 6002: The table/view 'POSTDATA.dbo.PostImage' does not have a primary ke
 [PostImage].[LastUpdateDate] AS [LastUpdateDate]
 FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Address_T_User" Association="Self.FK_Address_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ads_T_User" Association="Self.FK_Ads_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Ads" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_T_User" Association="Self.FK_Category_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Category" EntitySet="Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_PostOrNews" Association="Self.FK_Comment_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_T_User" Association="Self.FK_Comment_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_T_User" Association="Self.FK_Contact_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavLogoTitle_T_User" Association="Self.FK_FavLogoTitle_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="FavLogoTitle" EntitySet="FavLogoTitle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_TheProcessType1" Association="Self.FK_Log_Table_TheProcessType1">
+            <End Role="TheProcessType" EntitySet="TheProcessType" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meta_T_User" Association="Self.FK_Meta_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Meta" EntitySet="Meta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostImage_PostOrNews" Association="Self.FK_PostImage_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="PostImage" EntitySet="PostImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostImage_T_User" Association="Self.FK_PostImage_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostImage" EntitySet="PostImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOrNews_Category" Association="Self.FK_PostOrNews_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOrNews_T_User" Association="Self.FK_PostOrNews_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTag_PostOrNews" Association="Self.FK_PostTag_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="PostTag" EntitySet="PostTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTag_T_User" Association="Self.FK_PostTag_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostTag" EntitySet="PostTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocialMedia_T_User" Association="Self.FK_SocialMedia_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="SocialMedia" EntitySet="SocialMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Video_T_User" Association="Self.FK_Video_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -297,6 +569,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdataUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Address_T_User" FromRole="Address" ToRole="T_User" />
         </EntityType>
         <EntityType Name="Ad">
           <Key>
@@ -312,6 +585,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Ads_T_User" FromRole="Ads" ToRole="T_User" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -324,6 +598,8 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Category_T_User" FromRole="Category" ToRole="T_User" />
+          <NavigationProperty Name="PostOrNews" Relationship="Self.FK_PostOrNews_Category" FromRole="Category" ToRole="PostOrNews" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -342,6 +618,8 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" />
           <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PostOrNew" Relationship="Self.FK_Comment_PostOrNews" FromRole="Comment" ToRole="PostOrNews" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Comment_T_User" FromRole="Comment" ToRole="T_User" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -360,6 +638,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" />
           <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Contact_T_User" FromRole="Contact" ToRole="T_User" />
         </EntityType>
         <EntityType Name="FavLogoTitle">
           <Key>
@@ -374,6 +653,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_FavLogoTitle_T_User" FromRole="FavLogoTitle" ToRole="T_User" />
         </EntityType>
         <EntityType Name="Log_Table">
           <Key>
@@ -384,8 +664,9 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="IPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProcessID" Type="Int32" Nullable="false" />
           <Property Name="ProcessType" Type="Int32" Nullable="false" />
-          <Property Name="ProcessCategoryType" Type="Int32" Nullable="false" />
+          <Property Name="ProcessCategoryType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TheProcessType" Relationship="Self.FK_Log_Table_TheProcessType1" FromRole="Log_Table" ToRole="TheProcessType" />
         </EntityType>
         <EntityType Name="Meta">
           <Key>
@@ -399,6 +680,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Meta_T_User" FromRole="Meta" ToRole="T_User" />
         </EntityType>
         <EntityType Name="PostOrNew">
           <Key>
@@ -423,6 +705,11 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_PostOrNews_Category" FromRole="PostOrNews" ToRole="Category" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_PostOrNews" FromRole="PostOrNews" ToRole="Comment" />
+          <NavigationProperty Name="PostImages" Relationship="Self.FK_PostImage_PostOrNews" FromRole="PostOrNews" ToRole="PostImage" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_PostOrNews_T_User" FromRole="PostOrNews" ToRole="T_User" />
+          <NavigationProperty Name="PostTags" Relationship="Self.FK_PostTag_PostOrNews" FromRole="PostOrNews" ToRole="PostTag" />
         </EntityType>
         <EntityType Name="PostTag">
           <Key>
@@ -436,6 +723,8 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PostOrNew" Relationship="Self.FK_PostTag_PostOrNews" FromRole="PostTag" ToRole="PostOrNews" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_PostTag_T_User" FromRole="PostTag" ToRole="T_User" />
         </EntityType>
         <EntityType Name="SocialMedia">
           <Key>
@@ -450,6 +739,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_SocialMedia_T_User" FromRole="SocialMedia" ToRole="T_User" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -477,6 +767,18 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_T_User" FromRole="T_User" ToRole="Address" />
+          <NavigationProperty Name="Ads" Relationship="Self.FK_Ads_T_User" FromRole="T_User" ToRole="Ads" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Category_T_User" FromRole="T_User" ToRole="Category" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_T_User" FromRole="T_User" ToRole="Comment" />
+          <NavigationProperty Name="Contacts" Relationship="Self.FK_Contact_T_User" FromRole="T_User" ToRole="Contact" />
+          <NavigationProperty Name="FavLogoTitles" Relationship="Self.FK_FavLogoTitle_T_User" FromRole="T_User" ToRole="FavLogoTitle" />
+          <NavigationProperty Name="Metas" Relationship="Self.FK_Meta_T_User" FromRole="T_User" ToRole="Meta" />
+          <NavigationProperty Name="PostOrNews" Relationship="Self.FK_PostOrNews_T_User" FromRole="T_User" ToRole="PostOrNews" />
+          <NavigationProperty Name="PostTags" Relationship="Self.FK_PostTag_T_User" FromRole="T_User" ToRole="PostTag" />
+          <NavigationProperty Name="SocialMedias" Relationship="Self.FK_SocialMedia_T_User" FromRole="T_User" ToRole="SocialMedia" />
+          <NavigationProperty Name="PostImages" Relationship="Self.FK_PostImage_T_User" FromRole="T_User" ToRole="PostImage" />
+          <NavigationProperty Name="Videos" Relationship="Self.FK_Video_T_User" FromRole="T_User" ToRole="Video" />
         </EntityType>
         <EntityType Name="TheProcessType">
           <Key>
@@ -484,6 +786,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           </Key>
           <Property Name="ProcessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProcessName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Log_Table" Relationship="Self.FK_Log_Table_TheProcessType1" FromRole="TheProcessType" ToRole="Log_Table" />
         </EntityType>
         <EntityType Name="Video">
           <Key>
@@ -499,6 +802,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Video_T_User" FromRole="Video" ToRole="T_User" />
         </EntityType>
         <EntityType Name="PostImage">
           <Key>
@@ -518,7 +822,213 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PostOrNew" Relationship="Self.FK_PostImage_PostOrNews" FromRole="PostImage" ToRole="PostOrNews" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_PostImage_T_User" FromRole="PostImage" ToRole="T_User" />
         </EntityType>
+        <Association Name="FK_Address_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="LastUpdataUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ads_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Ads" Type="Self.Ad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ads">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Category" Type="Self.Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOrNews_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="PostOrNews" Type="Self.PostOrNew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="PostOrNews">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNew" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavLogoTitle_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="FavLogoTitle" Type="Self.FavLogoTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FavLogoTitle">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_Table_TheProcessType1">
+          <End Role="TheProcessType" Type="Self.TheProcessType" Multiplicity="1" />
+          <End Role="Log_Table" Type="Self.Log_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheProcessType">
+              <PropertyRef Name="ProcessID" />
+            </Principal>
+            <Dependent Role="Log_Table">
+              <PropertyRef Name="ProcessID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Meta_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Meta" Type="Self.Meta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Meta">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostImage_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNew" Multiplicity="1" />
+          <End Role="PostImage" Type="Self.PostImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="PostImage">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostOrNews_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostOrNews" Type="Self.PostOrNew" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostOrNews">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTag_PostOrNews">
+          <End Role="PostOrNews" Type="Self.PostOrNew" Multiplicity="1" />
+          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostOrNews">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="PostTag">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostTag_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostTag" Type="Self.PostTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostTag">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocialMedia_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SocialMedia">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostImage_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="PostImage" Type="Self.PostImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PostImage">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Video_T_User">
+          <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
+          <End Role="Video" Type="Self.Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="LastUpdateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="POSTDATAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Ads" EntityType="Self.Ad" />
@@ -536,6 +1046,74 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <EntitySet Name="TheProcessTypes" EntityType="Self.TheProcessType" />
           <EntitySet Name="Videos" EntityType="Self.Video" />
           <EntitySet Name="PostImages" EntityType="Self.PostImage" />
+          <AssociationSet Name="FK_Address_T_User" Association="Self.FK_Address_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ads_T_User" Association="Self.FK_Ads_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Ads" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_T_User" Association="Self.FK_Category_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOrNews_Category" Association="Self.FK_PostOrNews_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_PostOrNews" Association="Self.FK_Comment_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_T_User" Association="Self.FK_Comment_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_T_User" Association="Self.FK_Contact_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavLogoTitle_T_User" Association="Self.FK_FavLogoTitle_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="FavLogoTitle" EntitySet="FavLogoTitles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_Table_TheProcessType1" Association="Self.FK_Log_Table_TheProcessType1">
+            <End Role="TheProcessType" EntitySet="TheProcessTypes" />
+            <End Role="Log_Table" EntitySet="Log_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Meta_T_User" Association="Self.FK_Meta_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Meta" EntitySet="Metas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostImage_PostOrNews" Association="Self.FK_PostImage_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="PostImage" EntitySet="PostImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostOrNews_T_User" Association="Self.FK_PostOrNews_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTag_PostOrNews" Association="Self.FK_PostTag_PostOrNews">
+            <End Role="PostOrNews" EntitySet="PostOrNews" />
+            <End Role="PostTag" EntitySet="PostTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostTag_T_User" Association="Self.FK_PostTag_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostTag" EntitySet="PostTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SocialMedia_T_User" Association="Self.FK_SocialMedia_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="SocialMedia" EntitySet="SocialMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostImage_T_User" Association="Self.FK_PostImage_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="PostImage" EntitySet="PostImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Video_T_User" Association="Self.FK_Video_T_User">
+            <End Role="T_User" EntitySet="T_User" />
+            <End Role="Video" EntitySet="Videos" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>

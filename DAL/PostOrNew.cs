@@ -14,6 +14,13 @@ namespace DAL
     
     public partial class PostOrNew
     {
+        public PostOrNew()
+        {
+            this.Comments = new HashSet<Comment>();
+            this.PostImages = new HashSet<PostImage>();
+            this.PostTags = new HashSet<PostTag>();
+        }
+    
         public int PostID { get; set; }
         public string Title { get; set; }
         public string ShortContent { get; set; }
@@ -33,5 +40,11 @@ namespace DAL
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public int LastUpdateUserID { get; set; }
         public System.DateTime LastUpdateDate { get; set; }
+    
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<PostImage> PostImages { get; set; }
+        public virtual T_User T_User { get; set; }
+        public virtual ICollection<PostTag> PostTags { get; set; }
     }
 }

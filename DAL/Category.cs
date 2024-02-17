@@ -14,6 +14,11 @@ namespace DAL
     
     public partial class Category
     {
+        public Category()
+        {
+            this.PostOrNews = new HashSet<PostOrNew>();
+        }
+    
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public System.DateTime AddDate { get; set; }
@@ -21,5 +26,8 @@ namespace DAL
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public int LastUpdateUserID { get; set; }
         public System.DateTime LastUpdateDate { get; set; }
+    
+        public virtual T_User T_User { get; set; }
+        public virtual ICollection<PostOrNew> PostOrNews { get; set; }
     }
 }
