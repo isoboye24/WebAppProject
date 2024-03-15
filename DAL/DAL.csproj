@@ -74,6 +74,7 @@
     <Compile Include="Meta.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MetaDAO.cs" />
     <Compile Include="PostContext.cs" />
     <Compile Include="PostImage.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
