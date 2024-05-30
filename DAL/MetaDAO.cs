@@ -25,28 +25,41 @@ namespace DAL
 
         public List<MetaDTO> GetMetaData()
         {
-
-            List<MetaDTO> metaList = new List<MetaDTO>();
-            List<Meta> list = db.Metas.Where(x => x.isDeleted == false).OrderBy(x => x.AddDate).ToList();
-            foreach (var item in list)
+            try
             {
-                MetaDTO dto = new MetaDTO();
-                dto.MetaID = item.MetaID;
-                dto.Name = item.Name;
-                dto.MetaContent = item.MetaContent;
-                metaList.Add(dto);
+                List<MetaDTO> metaList = new List<MetaDTO>();
+                List<Meta> list = db.Metas.Where(x => x.isDeleted == false).OrderBy(x => x.AddDate).ToList();
+                foreach (var item in list)
+                {
+                    MetaDTO dto = new MetaDTO();
+                    dto.MetaID = item.MetaID;
+                    dto.Name = item.Name;
+                    dto.MetaContent = item.MetaContent;
+                    metaList.Add(dto);
+                }
+                return metaList;
             }
-            return metaList;
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         public MetaDTO GetMetaWithID(int ID)
         {
-            Meta meta = db.Metas.First(x => x.MetaID == ID);
-            MetaDTO dto = new MetaDTO();
-            dto.MetaID = meta.MetaID;
-            dto.Name = meta.Name;
-            dto.MetaContent = meta.MetaContent;
-            return dto;
+            try
+            {
+                Meta meta = db.Metas.First(x => x.MetaID == ID);
+                MetaDTO dto = new MetaDTO();
+                dto.MetaID = meta.MetaID;
+                dto.Name = meta.Name;
+                dto.MetaContent = meta.MetaContent;
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         public void UpdateMeta(MetaDTO model)

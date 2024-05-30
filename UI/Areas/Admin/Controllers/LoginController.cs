@@ -12,15 +12,16 @@ namespace UI.Areas.Admin.Controllers
     {
         UserBLL userBLL = new UserBLL();
         // GET: Admin/Login
+        // The program or the view page starts with this controller (empty at first)
         public ActionResult Index()
         {
             UserDTO dto = new UserDTO();
             return View(dto);
         }
         [HttpPost]
-        public ActionResult Index(UserDTO model)
+        public ActionResult Index(UserDTO model) // when an action is made in the login page, this action processes it and redirect to the post page.
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // If the state is valid as it is in the validation (in the model UserDTO) (i.e. required properties are satisfied).
             {
                 UserDTO user = userBLL.GetUserWithUsernameAndPassword(model);
                 if (user.ID !=0)
