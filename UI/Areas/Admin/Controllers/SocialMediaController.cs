@@ -60,5 +60,11 @@ namespace UI.Areas.Admin.Controllers
             }
             return View(model);
         }
+        public ActionResult SocialMediaList()
+        {
+            List<SocialMediaDTO> dtoList = new List<SocialMediaDTO>();
+            dtoList = bll.GetSocialMedias();
+            return View(dtoList);
+        }
     }
 }
