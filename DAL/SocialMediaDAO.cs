@@ -46,5 +46,46 @@ namespace DAL
 			}
             
         }
+
+        public SocialMediaDTO GetSocialMediaWithID(int ID)
+        {
+			try
+			{
+				SocialMedia socialMedia = db.SocialMedias.First(x => x.SocialMediaID == ID);
+				SocialMediaDTO dto = new SocialMediaDTO();
+				dto.SocialMediaID = socialMedia.SocialMediaID;
+				dto.Name = socialMedia.Name;
+				dto.ImagePath = socialMedia.ImagePath;
+				dto.Link = socialMedia.Link;
+				return dto;
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}            
+        }
+
+        public string UpdateSocialMedia(SocialMediaDTO model)
+        {
+			try
+			{
+				SocialMedia social = db.SocialMedias.First(x => x.SocialMediaID == model.SocialMediaID);
+				string oldImagePath = social.ImagePath;
+				social.Name = model.Name;
+				social.Link = model.Link;
+				if (model.ImagePath != null)
+				{
+					social.ImagePath = model.ImagePath;
+				}
+				social.LastUpdateDate = DateTime.Now;
+				social.LastUpdateUserID = UserStatic.UserID;
+				db.SaveChanges();
+				return oldImagePath;
+            }
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+        }
     }
 }

@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,19 @@ namespace BLL
             List<SocialMediaDTO> dtoList = new List<SocialMediaDTO>();
             dtoList = dao.GetSocialMedias();
             return dtoList;
+        }
+
+        public SocialMediaDTO GetSocialMediaWithID(int ID)
+        {
+            SocialMediaDTO dto = dao.GetSocialMediaWithID(ID);
+            return dto;
+        }
+
+        public string UpdateSocialMedia(SocialMediaDTO model)
+        {
+            string oldImagePath = dao.UpdateSocialMedia(model);
+            LogDAO.AddLog(General.ProcessType.SocialUpdate, General.TableName.Social, model.SocialMediaID);
+            return oldImagePath;
         }
     }
 }
