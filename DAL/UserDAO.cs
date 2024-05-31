@@ -49,6 +49,27 @@ namespace DAL
             }
         }
 
+        public UserDTO GetUserWithID(int ID)
+        {
+            try
+            {
+                T_User user = db.T_User.First(x => x.UserID == ID);
+                UserDTO dto = new UserDTO();
+                dto.ID = user.UserID;
+                dto.Name = user.NameSurname;
+                dto.Username = user.Username;
+                dto.Password = user.Password;
+                dto.isAdmin = user.isAdmin;
+                dto.Email = user.Email;
+                dto.ImagePath = user.ImagePath;
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public UserDTO GetUserWithUsernameAndPassword(UserDTO model)
         {
             UserDTO dto = new UserDTO();
@@ -62,6 +83,32 @@ namespace DAL
                 dto.isAdmin = user.isAdmin;
             }
             return dto;
+        }
+
+        public string UpdateUser(UserDTO model)
+        {
+            try
+            {
+                T_User user = db.T_User.First(x => x.UserID == model.ID);
+                string oldImagePath = user.ImagePath;
+                user.NameSurname = model.Name;
+                user.Username = model.Username;
+                user.Password = model.Password;
+                user.Email = model.Email;
+                user.isAdmin = model.isAdmin;
+                if (model.ImagePath != null)
+                {
+                    user.ImagePath = model.ImagePath;
+                }
+                user.LastUpdateDate = DateTime.Now;
+                user.LastUpdateUserID = UserStatic.UserID;
+                db.SaveChanges();
+                return oldImagePath;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

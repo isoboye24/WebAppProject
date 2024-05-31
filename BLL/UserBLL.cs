@@ -24,6 +24,8 @@ namespace BLL
             user.AddDate = DateTime.Now;
             user.LastUpdateDate = DateTime.Now;
             user.LastUpdateUserID = UserStatic.UserID;
+            // In order to see all users, I set isDeleted = false 
+            user.isDeleted = false;
             int ID = userDAO.AddUser(user);
             LogDAO.AddLog(General.ProcessType.UserAdd, General.TableName.User, ID);
         }
@@ -33,11 +35,23 @@ namespace BLL
             return userDAO.GetUsers();
         }
 
+        public UserDTO GetUserWithID(int ID)
+        {
+            return userDAO.GetUserWithID(ID);
+        }
+
         public UserDTO GetUserWithUsernameAndPassword(UserDTO model)
         {
             UserDTO dto = new UserDTO();
             dto = userDAO.GetUserWithUsernameAndPassword(model);
             return dto;
+        }
+
+        public string UpdateUser(UserDTO model)
+        {
+            string oldImagePath = userDAO.UpdateUser(model);
+            LogDAO.AddLog(General.ProcessType.UserUpdate, General.TableName.User, model.ID);
+            return oldImagePath;
         }
     }
 }
