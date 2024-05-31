@@ -23,6 +23,32 @@ namespace DAL
             }
         }
 
+        public List<UserDTO> GetUsers()
+        {
+            try
+            {
+                List<UserDTO> userList = new List<UserDTO>();
+                List<T_User> list = db.T_User.Where(x => x.isDeleted == false).OrderBy(x => x.AddDate).ToList();
+                foreach (var item in list)
+                {
+                    UserDTO dto = new UserDTO();
+                    dto.ID = item.UserID;
+                    dto.Name = item.NameSurname;
+                    dto.Username = item.Username;
+                    dto.ImagePath = item.ImagePath;
+                    dto.Password = item.Password;
+                    dto.Email = item.Email;
+                    dto.isAdmin = item.isAdmin;
+                    userList.Add(dto);
+                }
+                return userList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public UserDTO GetUserWithUsernameAndPassword(UserDTO model)
         {
             UserDTO dto = new UserDTO();

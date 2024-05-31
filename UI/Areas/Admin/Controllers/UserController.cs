@@ -51,5 +51,11 @@ namespace UI.Areas.Admin.Controllers
             }
             return View(model);
         }
+        public ActionResult UserList()
+        {
+            List<UserDTO> model = new List<UserDTO>();
+            model = bll.GetUsers();
+            return View(model);
+        }
     }
 }

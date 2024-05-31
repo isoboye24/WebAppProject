@@ -26,11 +26,6 @@ namespace BLL
             return true;
         }
 
-        public SocialMediaDTO GetSocialMediaData()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<SocialMediaDTO> GetSocialMedias()
         {
             List<SocialMediaDTO> dtoList = new List<SocialMediaDTO>();
