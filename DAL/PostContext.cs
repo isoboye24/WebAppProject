@@ -8,6 +8,6 @@ namespace DAL
 {
     public class PostContext
     {
-        public static POSTDATAEntities db = new POSTDATAEntities();
+        public static POSTDATAEntities1 db = new POSTDATAEntities1();
     }
 }

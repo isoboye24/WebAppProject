@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class POSTDATAEntities : DbContext
+    public partial class POSTDATAEntities1 : DbContext
     {
-        public POSTDATAEntities()
-            : base("name=POSTDATAEntities")
+        public POSTDATAEntities1()
+            : base("name=POSTDATAEntities1")
         {
         }
     
@@ -26,7 +26,7 @@ namespace DAL
         }
     
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Ad> Ads { get; set; }
+        public DbSet<AdsTable> AdsTables { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }

@@ -17,7 +17,7 @@ namespace DAL
         public T_User()
         {
             this.Addresses = new HashSet<Address>();
-            this.Ads = new HashSet<Ad>();
+            this.AdsTables = new HashSet<AdsTable>();
             this.Categories = new HashSet<Category>();
             this.Comments = new HashSet<Comment>();
             this.Contacts = new HashSet<Contact>();
@@ -44,7 +44,7 @@ namespace DAL
         public System.DateTime LastUpdateDate { get; set; }
     
         public virtual ICollection<Address> Addresses { get; set; }
-        public virtual ICollection<Ad> Ads { get; set; }
+        public virtual ICollection<AdsTable> AdsTables { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Contact> Contacts { get; set; }

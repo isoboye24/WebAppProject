@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ad.cs">
+    <Compile Include="Address.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Address.cs">
+    <Compile Include="AdsDAO.cs" />
+    <Compile Include="AdsTable.cs">
       <DependentUpon>PostModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">

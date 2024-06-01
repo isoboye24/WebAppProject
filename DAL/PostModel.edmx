@@ -23,7 +23,7 @@
           <Property Name="LastUpdataUserID" Type="int" Nullable="false" />
           <Property Name="LastUpdateDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Ads">
+        <EntityType Name="AdsTable">
           <Key>
             <PropertyRef Name="AdsID" />
           </Key>
@@ -260,12 +260,12 @@ warning 6002: The table/view 'POSTDATA.dbo.PostImage' does not have a primary ke
         </Association>
         <Association Name="FK_Ads_T_User">
           <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
-          <End Role="Ads" Type="Self.Ads" Multiplicity="*" />
+          <End Role="AdsTable" Type="Self.AdsTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Ads">
+            <Dependent Role="AdsTable">
               <PropertyRef Name="LastUpdateUserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -452,7 +452,7 @@ warning 6002: The table/view 'POSTDATA.dbo.PostImage' does not have a primary ke
         </Association>
         <EntityContainer Name="POSTDATAModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Ads" EntityType="Self.Ads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdsTable" EntityType="Self.AdsTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
@@ -484,7 +484,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK_Ads_T_User" Association="Self.FK_Ads_T_User">
             <End Role="T_User" EntitySet="T_User" />
-            <End Role="Ads" EntitySet="Ads" />
+            <End Role="AdsTable" EntitySet="AdsTable" />
           </AssociationSet>
           <AssociationSet Name="FK_Category_T_User" Association="Self.FK_Category_T_User">
             <End Role="T_User" EntitySet="T_User" />
@@ -571,7 +571,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="T_User" Relationship="Self.FK_Address_T_User" FromRole="Address" ToRole="T_User" />
         </EntityType>
-        <EntityType Name="Ad">
+        <EntityType Name="AdsTable">
           <Key>
             <PropertyRef Name="AdsID" />
           </Key>
@@ -585,7 +585,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="T_User" Relationship="Self.FK_Ads_T_User" FromRole="Ads" ToRole="T_User" />
+          <NavigationProperty Name="T_User" Relationship="Self.FK_Ads_T_User" FromRole="AdsTable" ToRole="T_User" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -768,7 +768,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           <Property Name="LastUpdateUserID" Type="Int32" Nullable="false" />
           <Property Name="LastUpdateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_T_User" FromRole="T_User" ToRole="Address" />
-          <NavigationProperty Name="Ads" Relationship="Self.FK_Ads_T_User" FromRole="T_User" ToRole="Ads" />
+          <NavigationProperty Name="AdsTables" Relationship="Self.FK_Ads_T_User" FromRole="T_User" ToRole="AdsTable" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Category_T_User" FromRole="T_User" ToRole="Category" />
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comment_T_User" FromRole="T_User" ToRole="Comment" />
           <NavigationProperty Name="Contacts" Relationship="Self.FK_Contact_T_User" FromRole="T_User" ToRole="Contact" />
@@ -839,12 +839,12 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
         </Association>
         <Association Name="FK_Ads_T_User">
           <End Role="T_User" Type="Self.T_User" Multiplicity="1" />
-          <End Role="Ads" Type="Self.Ad" Multiplicity="*" />
+          <End Role="AdsTable" Type="Self.AdsTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="T_User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Ads">
+            <Dependent Role="AdsTable">
               <PropertyRef Name="LastUpdateUserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1029,9 +1029,9 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="POSTDATAEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="POSTDATAEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="Ads" EntityType="Self.Ad" />
+          <EntitySet Name="AdsTables" EntityType="Self.AdsTable" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Comments" EntityType="Self.Comment" />
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
@@ -1052,7 +1052,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
           </AssociationSet>
           <AssociationSet Name="FK_Ads_T_User" Association="Self.FK_Ads_T_User">
             <End Role="T_User" EntitySet="T_User" />
-            <End Role="Ads" EntitySet="Ads" />
+            <End Role="AdsTable" EntitySet="AdsTables" />
           </AssociationSet>
           <AssociationSet Name="FK_Category_T_User" Association="Self.FK_Category_T_User">
             <End Role="T_User" EntitySet="T_User" />
@@ -1120,7 +1120,7 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="POSTDATAModelStoreContainer" CdmEntityContainer="POSTDATAEntities">
+        <EntityContainerMapping StorageEntityContainer="POSTDATAModelStoreContainer" CdmEntityContainer="POSTDATAEntities1">
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="POSTDATAModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -1140,9 +1140,9 @@ FROM [dbo].[PostImage] AS [PostImage]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ads">
-            <EntityTypeMapping TypeName="POSTDATAModel.Ad">
-              <MappingFragment StoreEntitySet="Ads">
+          <EntitySetMapping Name="AdsTables">
+            <EntityTypeMapping TypeName="POSTDATAModel.AdsTable">
+              <MappingFragment StoreEntitySet="AdsTable">
                 <ScalarProperty Name="AdsID" ColumnName="AdsID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
